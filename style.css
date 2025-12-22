@@ -1,0 +1,27 @@
+/*
+Theme Name: NeoPortfolio
+Theme URI: https://github.com/chrismccoy/neoportfolio
+Author: Chris McCoy
+Author URI: https://github.com/chrismccoy
+Description: A high-contrast, pop-art inspired portfolio theme using Tailwind CSS.
+Version: 1.0.0
+Requires at least: 6.0
+Text Domain: neoportfolio
+*/
+
+/* 
+ * TAILWIND SETUP
+ * This theme uses the Tailwind CDN
+ * In a build process your @tailwind 
+ * directives would be placed here.
+ */
+
+/* Admin Bar Alignment Fixes */
+.admin-bar header { top: 32px !important; }
+
+@media screen and (max-width: 782px) {
+    .admin-bar header { top: 46px !important; }
+}
+
+/* Lightbox Specific Styles */
+#lightbox.hidden { display: none; }

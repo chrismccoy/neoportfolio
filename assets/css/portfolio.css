@@ -1,0 +1,341 @@
+/* =========================================
+   Wrapper & Box Sizing
+   ========================================= */
+#neoportfolio-meta-wrapper {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#neoportfolio-meta-wrapper * {
+  box-sizing: border-box;
+}
+
+/* =========================================
+   Section Containers
+   ========================================= */
+.meta-section {
+  background: #f0f0f1;
+  border: 2px solid #000;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.meta-section h4 {
+  margin: 0 0 15px 0;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #ddd;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+/* =========================================
+   Inputs (Text, URL, Textarea)
+   ========================================= */
+.meta-field {
+  margin-bottom: 15px;
+}
+
+.meta-field label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 5px;
+  font-size: 12px;
+  color: #23282d;
+}
+
+#neoportfolio-meta-wrapper input[type="text"],
+#neoportfolio-meta-wrapper input[type="url"],
+#neoportfolio-meta-wrapper textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #999;
+}
+
+/* =========================================
+   Gallery Styles
+   ========================================= */
+#gallery-preview-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+  min-height: 20px;
+}
+
+.gallery-item {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border: 2px solid #000;
+  cursor: move;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-remove {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #d63638;
+  color: #fff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 18px;
+  cursor: pointer;
+  border: 2px solid #fff;
+  font-weight: bold;
+}
+
+.gallery-remove:hover {
+  background: #000;
+}
+
+/* =========================================
+   Feature Repeater Styles
+   ========================================= */
+.feature-row {
+  background: #fff;
+  border: 1px solid #ccd0d4;
+  margin-bottom: 10px;
+  border-left: 6px solid #000;
+}
+
+.row-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  background: #f9f9f9;
+  cursor: move;
+  border-bottom: 1px solid transparent;
+}
+
+.feature-row.open .row-header {
+  border-bottom: 1px solid #eee;
+}
+
+.drag-handle {
+  margin-right: 10px;
+  color: #999;
+  cursor: move;
+}
+
+.row-title-preview {
+  font-weight: bold;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.row-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  position: static;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.ui-sortable-placeholder {
+  border: 2px dashed #ffde59;
+  background: #fffbe5;
+  height: 50px;
+  margin-bottom: 10px;
+  visibility: visible !important;
+}
+
+.row-content {
+  padding: 20px;
+  display: none;
+}
+
+.feature-row.open .row-content {
+  display: block;
+}
+
+/* =========================================
+   Emoji Picker Styles
+   ========================================= */
+.emoji-input-wrapper {
+  display: flex;
+  gap: 5px;
+  align-items: stretch;
+}
+
+.emoji-input-wrapper input[type="text"] {
+  width: 80px !important;
+  text-align: center;
+  font-size: 28px;
+  padding: 0 !important;
+  height: 60px !important;
+  line-height: 60px;
+}
+
+.emoji-trigger-btn {
+  background: #f0f0f1;
+  border: 1px solid #999;
+  cursor: pointer;
+  font-size: 28px;
+  width: 60px;
+  height: 60px;
+  padding: 0;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.emoji-trigger-btn:hover {
+  background: #fff;
+  border-color: #000;
+  transform: scale(1.05);
+}
+
+/* Modal Overlay */
+#emoji-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 160000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(2px);
+}
+
+#emoji-modal-overlay em-emoji-picker {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* =========================================
+   Buttons & Utils
+   ========================================= */
+.toggle-row {
+  color: #0073aa;
+  border: 1px solid #0073aa;
+  padding: 2px 8px;
+  border-radius: 3px;
+  background: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.toggle-row:hover {
+  background: #0073aa;
+  color: white;
+}
+
+.remove-row {
+  color: #d63638;
+  border: 1px solid #d63638;
+  padding: 2px 8px;
+  border-radius: 3px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.remove-row:hover {
+  background: #d63638;
+  color: white;
+}
+
+.button-large-custom {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* =========================================
+   Delete Confirmation Modal
+   ========================================= */
+#delete-confirm-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 150000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(2px);
+}
+
+#delete-confirm-modal {
+  background: #fff;
+  border: 4px solid #000;
+  padding: 30px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  position: relative;
+}
+
+#delete-confirm-modal h4 {
+  margin: 0 0 15px 0;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: #d63638;
+}
+
+#delete-confirm-modal p {
+  margin-bottom: 25px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+}
+
+#delete-confirm-modal .modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+#delete-confirm-modal .button-modal {
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+  font-size: 13px;
+}
+
+#delete-confirm-modal .button-modal-cancel {
+  background: #f0f0f1;
+  border: 1px solid #999;
+  color: #555;
+}
+
+#delete-confirm-modal .button-modal-cancel:hover {
+  background: #e0e0e0;
+  border-color: #777;
+}
+
+#delete-confirm-modal .button-modal-confirm {
+  background: #d63638;
+  border: 1px solid #d63638;
+  color: #fff;
+}
+
+#delete-confirm-modal .button-modal-confirm:hover {
+  background: #c32d2f;
+  border-color: #c32d2f;
+}
