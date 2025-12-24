@@ -129,6 +129,7 @@ function neoportfolio_add_main_meta_box()
         'high'
     );
 }
+
 add_action('add_meta_boxes', 'neoportfolio_add_main_meta_box');
 
 /**
@@ -639,4 +640,5 @@ function neoportfolio_remove_post_editor()
 {
     remove_post_type_support('post', 'editor');
 }
+
 add_action('admin_init', 'neoportfolio_remove_post_editor');
