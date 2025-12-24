@@ -9,7 +9,7 @@
 get_header(); ?>
 
 <section class="text-center py-16">
-    <h1 class="text-9xl font-extrabold uppercase tracking-tighter text-[#FFDE59]" style="-webkit-text-stroke: 2px black; text-stroke: 2px black;">
+    <h1 class="text-9xl font-extrabold uppercase tracking-tighter text-neo-yellow" style="-webkit-text-stroke: 2px black; text-stroke: 2px black;">
         404
     </h1>
     <h2 class="mt-4 text-4xl font-bold uppercase">
@@ -20,7 +20,7 @@ get_header(); ?>
     </p>
     <div class="mt-8">
         <a href="<?php echo esc_url(home_url('/')); ?>"
-           class="inline-block px-8 py-4 bg-[#FFDE59] text-black text-xl font-bold border-4 border-black uppercase shadow-[4px_4px_0_0_#000] cursor-pointer transition-all duration-150 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_#000] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none">
+           class="inline-block px-8 py-4 bg-neo-yellow text-neo-black text-xl font-bold border-4 border-neo-black uppercase shadow-neo shadow-neo-black cursor-pointer transition-all duration-150 hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-neo-sm hover:shadow-neo-black active:translate-x-1 active:translate-y-1 active:shadow-none">
             &larr; Go to Homepage
         </a>
     </div>

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * NeoPortfolio functions and definitions
  *
@@ -34,19 +33,16 @@ function neoportfolio_theme_setup()
         ]
     );
 }
+
 add_action('after_setup_theme', 'neoportfolio_theme_setup');
 
 /**
  * Enqueue Frontend Assets
  *
- * Loads Tailwind CSS (CDN), Google Fonts, Font Awesome,
- * and the main theme stylesheet.
+ * Loads the compiled Tailwind CSS, Google Fonts, and Font Awesome
  */
 function neoportfolio_enqueue_assets()
 {
-    // Tailwind CDN
-    wp_enqueue_script('tailwind', 'https://cdn.tailwindcss.com', [], null, false);
-
     // Google Fonts
     wp_enqueue_style(
         'google-fonts',
@@ -63,8 +59,14 @@ function neoportfolio_enqueue_assets()
         '6.5.1'
     );
 
-    // Main Style
-    wp_enqueue_style('neoportfolio-style', get_stylesheet_uri());
+    // Compiled Tailwind CSS
+    $theme_version = wp_get_theme()->get('Version');
+    wp_enqueue_style(
+        'neoportfolio-compiled',
+        get_template_directory_uri() . '/assets/css/theme.css',
+        [],
+        $theme_version
+    );
 }
 
 add_action('wp_enqueue_scripts', 'neoportfolio_enqueue_assets');
@@ -78,7 +80,6 @@ add_action('wp_enqueue_scripts', 'neoportfolio_enqueue_assets');
 function neoportfolio_admin_assets($hook)
 {
     if ($hook == 'post-new.php' || $hook == 'post.php') {
-        // Native WordPress Scripts
         wp_enqueue_media();
         wp_enqueue_script('jquery-ui-sortable');
 
@@ -128,7 +129,6 @@ function neoportfolio_add_main_meta_box()
         'high'
     );
 }
-
 add_action('add_meta_boxes', 'neoportfolio_add_main_meta_box');
 
 /**
@@ -141,12 +141,12 @@ function neoportfolio_render_main_meta($post)
     wp_nonce_field('neoportfolio_save_data', 'neoportfolio_nonce');
 
     // Retrieve Data
-    $intro_text = get_post_meta($post->ID, '_neoportfolio_intro_text', true);
-    $project_link = get_post_meta($post->ID, '_neoportfolio_project_link', true);
+    $intro_text    = get_post_meta($post->ID, '_neoportfolio_intro_text', true);
+    $project_link  = get_post_meta($post->ID, '_neoportfolio_project_link', true);
     $purchase_link = get_post_meta($post->ID, '_neoportfolio_purchase_link', true);
-    $video_url = get_post_meta($post->ID, '_neoportfolio_video_url', true);
-    $features = get_post_meta($post->ID, '_neoportfolio_features', true);
-    $gallery_ids = get_post_meta($post->ID, '_neoportfolio_gallery_ids', true);
+    $video_url     = get_post_meta($post->ID, '_neoportfolio_video_url', true);
+    $features      = get_post_meta($post->ID, '_neoportfolio_features', true);
+    $gallery_ids   = get_post_meta($post->ID, '_neoportfolio_gallery_ids', true);
 
     if (!is_array($features)) {
         $features = [];
@@ -205,8 +205,8 @@ function neoportfolio_render_main_meta($post)
         <h4 style="font-weight: 800; text-transform: uppercase; font-size: 14px; margin-bottom: 15px;">✨ Feature List Items</h4>
         <div id="features-container">
             <?php foreach ($features as $index => $feature) :
-                $emoji = isset($feature['emoji']) ? $feature['emoji'] : '';
-                $title = isset($feature['title']) ? $feature['title'] : '';
+                $emoji   = isset($feature['emoji']) ? $feature['emoji'] : '';
+                $title   = isset($feature['title']) ? $feature['title'] : '';
                 $preview = trim($emoji . ' ' . $title);
                 if (empty($preview)) {
                     $preview = "New Feature Item";
@@ -252,7 +252,7 @@ function neoportfolio_render_main_meta($post)
 /**
  * Save Meta Data
  *
- * Sanitizes and saves all data from the unified meta box when the post is saved.
+ * Sanitizes and saves all data from the meta box when the post is saved.
  * Handles Array sanitization for repeater fields.
  */
 function neoportfolio_save_meta_data($post_id)
@@ -326,7 +326,7 @@ function neoportfolio_display_features($post_id = null)
         $post_id = $post ? $post->ID : 0;
     }
 
-    $features = get_post_meta($post_id, '_neoportfolio_features', true);
+    $features   = get_post_meta($post_id, '_neoportfolio_features', true);
     $intro_text = get_post_meta($post_id, '_neoportfolio_intro_text', true);
 
     if ((empty($features) || !is_array($features)) && empty($intro_text)) {
@@ -344,12 +344,12 @@ function neoportfolio_display_features($post_id = null)
         </style>
 
         <?php if (!empty($intro_text)) : ?>
-            <div class="mb-16 border-l-[12px] border-[#FFDE59] bg-neutral-50 border-y-4 border-r-4 border-black p-6 md:p-10 shadow-[8px_8px_0_0_#000]">
+            <div class="mb-16 border-l-[12px] border-neo-yellow bg-neutral-50 border-y-4 border-r-4 border-neo-black p-6 md:p-10 shadow-neo-lg shadow-neo-black">
                 <div class="flex items-center gap-2 mb-4 opacity-60">
                     <i class="fa-solid fa-circle-info"></i>
                     <span class="font-mono text-xs font-bold uppercase">/DESCRIPTION.md</span>
                 </div>
-                <p class="text-xl md:text-2xl font-black uppercase leading-tight text-black m-0">
+                <p class="text-xl md:text-2xl font-black uppercase leading-tight text-neo-black m-0">
                     <?php echo nl2br(esc_html($intro_text)); ?>
                 </p>
             </div>
@@ -357,17 +357,17 @@ function neoportfolio_display_features($post_id = null)
 
         <?php if (!empty($features)) : ?>
             <div class="flex items-center gap-4 mb-10">
-                <h3 class="text-3xl md:text-4xl font-black uppercase bg-black text-white px-6 py-3 inline-block shadow-[6px_6px_0_0_#5CE1E6] transform -rotate-1 m-0">
+                <h3 class="text-3xl md:text-4xl font-black uppercase bg-neo-black text-neo-white px-6 py-3 inline-block shadow-neo-md shadow-neo-cyan transform -rotate-1 m-0">
                     ✨ Features
                 </h3>
-                <div class="flex-grow h-4 bg-black repeating-linear-gradient hidden md:block"></div>
+                <div class="flex-grow h-4 bg-neo-black repeating-linear-gradient hidden md:block"></div>
             </div>
             <div class="neo-grid-fix grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
             <?php foreach ($features as $f) : ?>
                 <div class="group relative h-full">
-                    <div class="absolute inset-0 bg-black translate-x-2 translate-y-2"></div>
-                    <div class="relative h-full bg-white border-4 border-black p-6 transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1 group-hover:bg-[#FFDE59] flex flex-col">
-                        <strong class="block text-xl font-black uppercase mb-3 border-b-4 border-black pb-2 text-black">
+                    <div class="absolute inset-0 bg-neo-black translate-x-2 translate-y-2"></div>
+                    <div class="relative h-full bg-neo-white border-4 border-neo-black p-6 transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1 group-hover:bg-neo-yellow flex flex-col">
+                        <strong class="block text-xl font-black uppercase mb-3 border-b-4 border-neo-black pb-2 text-neo-black">
                             <?php echo esc_html($f['emoji'] . ' ' . $f['title']); ?>
                         </strong>
                         <p class="font-mono text-sm font-bold leading-relaxed text-neutral-800 flex-grow">
@@ -400,17 +400,17 @@ function neoportfolio_display_gallery($post_id = null)
         return '';
     }
 
-    $ids_array = explode(',', $gallery_ids);
+    $ids_array    = explode(',', $gallery_ids);
     $project_slug = strtoupper(str_replace('-', '_', get_post_field('post_name', $post_id)));
 
     ob_start();
     ?>
-    <div class="border-t-8 border-black pt-12 mt-12 not-prose">
+    <div class="border-t-8 border-neo-black pt-12 mt-12 not-prose">
         <div class="flex items-center gap-4 mb-8">
-            <h3 class="text-4xl font-black uppercase bg-black text-white px-4 py-2 inline-block shadow-[4px_4px_0_0_#5CE1E6]">
+            <h3 class="text-4xl font-black uppercase bg-neo-black text-neo-white px-4 py-2 inline-block shadow-neo shadow-neo-cyan">
                 Visual_Assets
             </h3>
-            <div class="flex-grow h-4 bg-black repeating-linear-gradient"></div>
+            <div class="flex-grow h-4 bg-neo-black repeating-linear-gradient"></div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
@@ -418,7 +418,7 @@ function neoportfolio_display_gallery($post_id = null)
             $i = 0;
             foreach ($ids_array as $img_id) :
                 $i++;
-                $full_src = wp_get_attachment_image_src($img_id, 'full');
+                $full_src    = wp_get_attachment_image_src($img_id, 'full');
                 $display_src = wp_get_attachment_image_src($img_id, 'large');
 
                 if (!$full_src) {
@@ -428,17 +428,17 @@ function neoportfolio_display_gallery($post_id = null)
                 $filename = $project_slug . '_IMG_' . str_pad($i, 3, '0', STR_PAD_LEFT) . '.JPG';
                 ?>
                 <a href="<?php echo esc_url($full_src[0]); ?>" class="screenshot-thumbnail group block relative cursor-pointer">
-                    <div class="border-4 border-black bg-white shadow-[8px_8px_0_0_#000] transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-[16px_16px_0_0_#000]">
-                        <div class="bg-[#FF90E8] border-b-4 border-black p-2 flex items-center">
-                            <div class="flex-grow bg-white border-2 border-black h-7 px-2 flex items-center overflow-hidden">
+                    <div class="border-4 border-neo-black bg-neo-white shadow-neo-lg shadow-neo-black transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-neo-2xl shadow-neo-black">
+                        <div class="bg-neo-pink border-b-4 border-neo-black p-2 flex items-center">
+                            <div class="flex-grow bg-neo-white border-2 border-neo-black h-7 px-2 flex items-center overflow-hidden">
                                 <span class="font-mono text-[10px] md:text-xs font-bold truncate opacity-60">
                                     <?php echo esc_html($filename); ?>
                                 </span>
                             </div>
                         </div>
                         <div class="relative overflow-hidden aspect-video border-b-2 border-transparent">
-                            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center backdrop-blur-[1px]">
-                                <span class="bg-black text-white font-mono font-bold px-4 py-2 border-2 border-white shadow-[4px_4px_0_0_#FFF] transform -rotate-3 hover:scale-110 transition-transform">
+                            <div class="absolute inset-0 bg-neo-black/20 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center backdrop-blur-[1px]">
+                                <span class="bg-neo-black text-neo-white font-mono font-bold px-4 py-2 border-2 border-neo-white shadow-neo shadow-neo-white transform -rotate-3 hover:scale-110 transition-transform">
                                     [ ZOOM_IN ]
                                 </span>
                             </div>
@@ -470,26 +470,26 @@ function neoportfolio_pagination()
 
     $current_page = max(1, get_query_var('paged'));
 
-    echo '<div class="w-full border-b-4 border-black mt-16 mb-8"></div>';
+    echo '<div class="w-full border-b-4 border-neo-black mt-16 mb-8"></div>';
     echo '<div class="flex flex-col md:flex-row justify-between items-center gap-4">';
 
     // Previous Link
     if ($current_page > 1) {
         $prev_link = get_pagenum_link($current_page - 1);
         echo '<a href="' . esc_url($prev_link) . '" class="group relative inline-block">
-                <div class="absolute inset-0 bg-black translate-x-1 translate-y-1"></div>
-                <div class="relative bg-white border-4 border-black px-6 py-3 font-bold uppercase hover:-translate-y-1 hover:-translate-x-1 hover:bg-[#FFDE59] transition-all">
+                <div class="absolute inset-0 bg-neo-black translate-x-1 translate-y-1"></div>
+                <div class="relative bg-neo-white border-4 border-neo-black px-6 py-3 font-bold uppercase hover:-translate-y-1 hover:-translate-x-1 hover:bg-neo-yellow transition-all">
                     &larr; Previous
                 </div>
               </a>';
     } else {
-        echo '<div class="opacity-30 pointer-events-none border-4 border-black px-6 py-3 font-bold uppercase bg-neutral-200">
+        echo '<div class="opacity-30 pointer-events-none border-4 border-neo-black px-6 py-3 font-bold uppercase bg-neutral-200">
                 &larr; Previous
               </div>';
     }
 
     // Page Counter
-    echo '<div class="font-mono font-bold text-lg bg-black text-white px-4 py-2 border-4 border-transparent shadow-[4px_4px_0_0_#FF90E8]">
+    echo '<div class="font-mono font-bold text-lg bg-neo-black text-neo-white px-4 py-2 border-4 border-transparent shadow-neo shadow-neo-pink">
             PAGE ' . $current_page . ' / ' . $total_pages . '
           </div>';
 
@@ -497,13 +497,13 @@ function neoportfolio_pagination()
     if ($current_page < $total_pages) {
         $next_link = get_pagenum_link($current_page + 1);
         echo '<a href="' . esc_url($next_link) . '" class="group relative inline-block">
-                <div class="absolute inset-0 bg-black translate-x-1 translate-y-1"></div>
-                <div class="relative bg-white border-4 border-black px-6 py-3 font-bold uppercase hover:-translate-y-1 hover:-translate-x-1 hover:bg-[#FFDE59] transition-all">
+                <div class="absolute inset-0 bg-neo-black translate-x-1 translate-y-1"></div>
+                <div class="relative bg-neo-white border-4 border-neo-black px-6 py-3 font-bold uppercase hover:-translate-y-1 hover:-translate-x-1 hover:bg-neo-yellow transition-all">
                     Next &rarr;
                 </div>
               </a>';
     } else {
-        echo '<div class="opacity-30 pointer-events-none border-4 border-black px-6 py-3 font-bold uppercase bg-neutral-200">
+        echo '<div class="opacity-30 pointer-events-none border-4 border-neo-black px-6 py-3 font-bold uppercase bg-neutral-200">
                 Next &rarr;
               </div>';
     }
@@ -516,7 +516,8 @@ function neoportfolio_pagination()
  *
  * Helper function to output categories and tags in a neo-brutalism style.
  */
-function neoportfolio_display_taxonomy_terms($post_id = null) {
+function neoportfolio_display_taxonomy_terms($post_id = null)
+{
     if (!$post_id) {
         global $post;
         $post_id = $post ? $post->ID : 0;
@@ -527,7 +528,7 @@ function neoportfolio_display_taxonomy_terms($post_id = null) {
     }
 
     $categories = get_the_category($post_id);
-    $tags = get_the_tags($post_id);
+    $tags       = get_the_tags($post_id);
 
     if (empty($categories) && empty($tags)) {
         return '';
@@ -538,9 +539,9 @@ function neoportfolio_display_taxonomy_terms($post_id = null) {
     <div class="neoportfolio-taxonomies mb-8 flex flex-wrap gap-3 not-prose">
         <?php if (!empty($categories)) : ?>
             <?php foreach ($categories as $category) : ?>
-                <a href="<?php echo esc_url(get_category_link($category->term_id)); ?>" class="group relative inline-flex items-center text-black no-underline">
-                    <div class="absolute inset-0 bg-black translate-x-1 translate-y-1"></div>
-                    <span class="relative block bg-[#5CE1E6] border-2 border-black px-4 py-2 text-sm font-black uppercase transition-transform group-hover:-translate-x-0 group-hover:-translate-y-0 group-hover:bg-white">
+                <a href="<?php echo esc_url(get_category_link($category->term_id)); ?>" class="group relative inline-flex items-center text-neo-black no-underline">
+                    <div class="absolute inset-0 bg-neo-black translate-x-1 translate-y-1"></div>
+                    <span class="relative block bg-neo-cyan border-2 border-neo-black px-4 py-2 text-sm font-black uppercase transition-transform group-hover:-translate-x-0 group-hover:-translate-y-0 group-hover:bg-neo-white">
                         <i class="fa-solid fa-folder mr-1"></i><?php echo esc_html($category->name); ?>
                     </span>
                 </a>
@@ -549,9 +550,9 @@ function neoportfolio_display_taxonomy_terms($post_id = null) {
 
         <?php if (!empty($tags)) : ?>
             <?php foreach ($tags as $tag) : ?>
-                <a href="<?php echo esc_url(get_tag_link($tag->term_id)); ?>" class="group relative inline-flex items-center text-black no-underline">
-                    <div class="absolute inset-0 bg-black translate-x-1 translate-y-1"></div>
-                    <span class="relative block bg-[#FF90E8] border-2 border-black px-4 py-2 text-sm font-black uppercase transition-transform group-hover:-translate-x-0 group-hover:-translate-y-0 group-hover:bg-white">
+                <a href="<?php echo esc_url(get_tag_link($tag->term_id)); ?>" class="group relative inline-flex items-center text-neo-black no-underline">
+                    <div class="absolute inset-0 bg-neo-black translate-x-1 translate-y-1"></div>
+                    <span class="relative block bg-neo-pink border-2 border-neo-black px-4 py-2 text-sm font-black uppercase transition-transform group-hover:-translate-x-0 group-hover:-translate-y-0 group-hover:bg-neo-white">
                         <i class="fa-solid fa-hashtag mr-1"></i><?php echo esc_html($tag->name); ?>
                     </span>
                 </a>
@@ -567,7 +568,8 @@ function neoportfolio_display_taxonomy_terms($post_id = null) {
  *
  * Function to output project links in a neo-brutalism style.
  */
-function neoportfolio_display_project_links($post_id = null) {
+function neoportfolio_display_project_links($post_id = null)
+{
     if (!$post_id) {
         global $post;
         $post_id = $post ? $post->ID : 0;
@@ -577,9 +579,9 @@ function neoportfolio_display_project_links($post_id = null) {
         return '';
     }
 
-    $project_link = get_post_meta($post_id, '_neoportfolio_project_link', true);
+    $project_link  = get_post_meta($post_id, '_neoportfolio_project_link', true);
     $purchase_link = get_post_meta($post_id, '_neoportfolio_purchase_link', true);
-    $video_url = get_post_meta($post_id, '_neoportfolio_video_url', true);
+    $video_url     = get_post_meta($post_id, '_neoportfolio_video_url', true);
 
     if (empty($project_link) && empty($purchase_link) && empty($video_url)) {
         return '';
@@ -589,18 +591,18 @@ function neoportfolio_display_project_links($post_id = null) {
     ?>
     <div class="neoportfolio-project-links mb-12 mt-6 flex flex-wrap items-center gap-4 not-prose">
         <?php if (!empty($project_link)) : ?>
-            <a href="<?php echo esc_url($project_link); ?>" target="_blank" rel="noopener noreferrer" class="group relative inline-block text-black no-underline">
-                <div class="absolute inset-0 bg-black translate-x-1 translate-y-1"></div>
-                <div class="relative bg-[#FFDE59] border-4 border-black px-6 py-3 font-bold uppercase transition-all group-hover:-translate-y-0 group-hover:-translate-x-0 group-hover:bg-white">
+            <a href="<?php echo esc_url($project_link); ?>" target="_blank" rel="noopener noreferrer" class="group relative inline-block text-neo-black no-underline">
+                <div class="absolute inset-0 bg-neo-black translate-x-1 translate-y-1"></div>
+                <div class="relative bg-neo-yellow border-4 border-neo-black px-6 py-3 font-bold uppercase transition-all group-hover:-translate-y-0 group-hover:-translate-x-0 group-hover:bg-neo-white">
                     <i class="fa-solid fa-arrow-up-right-from-square mr-2"></i> Live Project
                 </div>
             </a>
         <?php endif; ?>
 
         <?php if (!empty($purchase_link)) : ?>
-            <a href="<?php echo esc_url($purchase_link); ?>" target="_blank" rel="noopener noreferrer" class="group relative inline-block text-black no-underline">
-                <div class="absolute inset-0 bg-black translate-x-1 translate-y-1"></div>
-                <div class="relative bg-[#FF90E8] border-4 border-black px-6 py-3 font-bold uppercase transition-all group-hover:-translate-y-0 group-hover:-translate-x-0 group-hover:bg-white">
+            <a href="<?php echo esc_url($purchase_link); ?>" target="_blank" rel="noopener noreferrer" class="group relative inline-block text-neo-black no-underline">
+                <div class="absolute inset-0 bg-neo-black translate-x-1 translate-y-1"></div>
+                <div class="relative bg-neo-pink border-4 border-neo-black px-6 py-3 font-bold uppercase transition-all group-hover:-translate-y-0 group-hover:-translate-x-0 group-hover:bg-neo-white">
                     <i class="fa-solid fa-cart-shopping mr-2"></i> Buy Now
                 </div>
             </a>
@@ -615,9 +617,9 @@ function neoportfolio_display_project_links($post_id = null) {
                 $video_icon = 'fa-brands fa-vimeo-v';
             }
             ?>
-            <a href="<?php echo esc_url($video_url); ?>" target="_blank" rel="noopener noreferrer" class="group relative inline-block text-black no-underline">
-                <div class="absolute inset-0 bg-black translate-x-1 translate-y-1"></div>
-                <div class="relative bg-[#90EE90] border-4 border-black px-6 py-3 font-bold uppercase transition-all group-hover:-translate-y-0 group-hover:-translate-x-0 group-hover:bg-white">
+            <a href="<?php echo esc_url($video_url); ?>" target="_blank" rel="noopener noreferrer" class="group relative inline-block text-neo-black no-underline">
+                <div class="absolute inset-0 bg-neo-black translate-x-1 translate-y-1"></div>
+                <div class="relative bg-neo-green border-4 border-neo-black px-6 py-3 font-bold uppercase transition-all group-hover:-translate-y-0 group-hover:-translate-x-0 group-hover:bg-neo-white">
                     <i class="<?php echo esc_attr($video_icon); ?> mr-2"></i> Watch Video
                 </div>
             </a>
@@ -637,5 +639,4 @@ function neoportfolio_remove_post_editor()
 {
     remove_post_type_support('post', 'editor');
 }
-
 add_action('admin_init', 'neoportfolio_remove_post_editor');

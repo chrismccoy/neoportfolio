@@ -9,13 +9,13 @@
         </main>
 
         <footer class="mt-auto">
-            <div class="flex h-4 border-t-4 border-black">
-                <div class="w-1/3 bg-[#FFDE59] border-r-4 border-black"></div>
-                <div class="w-1/3 bg-[#FF90E8] border-r-4 border-black"></div>
-                <div class="w-1/3 bg-[#5CE1E6]"></div>
+            <div class="flex h-4 border-t-4 border-neo-black">
+                <div class="w-1/3 bg-neo-yellow border-r-4 border-neo-black"></div>
+                <div class="w-1/3 bg-neo-pink border-r-4 border-neo-black"></div>
+                <div class="w-1/3 bg-neo-cyan"></div>
             </div>
 
-            <div class="bg-black text-white p-8 border-t-4 border-black">
+            <div class="bg-neo-black text-neo-white p-8 border-t-4 border-neo-black">
                 <div class="flex flex-col md:flex-row justify-between items-center gap-8">
 
                     <div class="order-3 md:order-1 text-center md:text-left">
@@ -25,7 +25,7 @@
                     </div>
 
                     <div class="flex flex-wrap justify-center gap-4 order-1 md:order-2">
-                        <a href="#" class="w-12 h-12 flex items-center justify-center bg-white border-2 border-white text-black hover:bg-[#FFDE59] hover:border-[#FFDE59] hover:text-black transition-colors text-2xl">
+                        <a href="#" class="w-12 h-12 flex items-center justify-center bg-neo-white border-2 border-neo-white text-neo-black hover:bg-neo-yellow hover:border-neo-yellow hover:text-neo-black transition-colors text-2xl">
                             <i class="fab fa-github"></i>
                         </a>
                     </div>
@@ -36,7 +36,7 @@
     </div>
 
     <button id="scrollToTopBtn" aria-label="Scroll to Top"
-        class="fixed bottom-[30px] right-[30px] z-[9999] flex h-[60px] w-[60px] items-center justify-center border-4 border-black bg-[#FFDE59] text-black shadow-[4px_4px_0_0_#000] cursor-pointer opacity-0 pointer-events-none translate-y-[20px] transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-[8px_8px_0_0_#000] [&.show]:opacity-100 [&.show]:pointer-events-auto [&.show]:translate-y-0">
+        class="fixed bottom-[30px] right-[30px] z-[9999] flex h-[60px] w-[60px] items-center justify-center border-4 border-neo-black bg-neo-yellow text-neo-black shadow-neo shadow-neo-black cursor-pointer opacity-0 pointer-events-none translate-y-[20px] transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-neo-lg hover:shadow-neo-black [&.show]:opacity-100 [&.show]:pointer-events-auto [&.show]:translate-y-0">
         <i class="fa-solid fa-arrow-up text-2xl font-black"></i>
     </button>
 

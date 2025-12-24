@@ -10,15 +10,15 @@
 
 get_header(); ?>
 
-<div class="bg-neutral-50 border-b-4 border-black p-8 md:p-16 mb-8 text-center">
+<div class="bg-neutral-50 border-b-4 border-neo-black p-8 md:p-16 mb-8 text-center">
 
     <div class="mb-6">
-        <span class="font-mono text-sm font-bold bg-[#FF90E8] border-2 border-black px-3 py-1 shadow-[4px_4px_0_0_#000] -rotate-2 inline-block uppercase">
+        <span class="font-mono text-sm font-bold bg-neo-pink border-2 border-neo-black px-3 py-1 shadow-neo shadow-neo-black -rotate-2 inline-block uppercase">
             // ARCHIVE_FILTER_ACTIVE
         </span>
     </div>
 
-    <h1 class="text-6xl md:text-8xl font-black uppercase tracking-tighter mb-4 text-black">
+    <h1 class="text-6xl md:text-8xl font-black uppercase tracking-tighter mb-4 text-neo-black">
         <?php the_archive_title(); ?>
     </h1>
 
@@ -36,17 +36,17 @@ get_header(); ?>
         $display_id = strtoupper(str_replace('-', ' ', $slug));
     ?>
         <article class="group relative block h-full">
-            <div class="absolute inset-0 bg-black translate-x-3 translate-y-3 transition-transform group-hover:translate-x-4 group-hover:translate-y-4"></div>
+            <div class="absolute inset-0 bg-neo-black translate-x-3 translate-y-3 transition-transform group-hover:translate-x-4 group-hover:translate-y-4"></div>
 
-            <a href="<?php the_permalink(); ?>" class="relative block h-full bg-white border-4 border-black p-6 flex flex-col justify-between transition-transform group-hover:-translate-y-1 group-hover:-translate-x-1 hover:bg-[#FFDE59]">
+            <a href="<?php the_permalink(); ?>" class="relative block h-full bg-neo-white border-4 border-neo-black p-6 flex flex-col justify-between transition-transform group-hover:-translate-y-1 group-hover:-translate-x-1 hover:bg-neo-yellow">
 
                 <div class="mb-8">
-                    <span class="font-mono text-xs font-bold border-2 border-black px-2 py-1 bg-white mb-4 inline-block">
+                    <span class="font-mono text-xs font-bold border-2 border-neo-black px-2 py-1 bg-neo-white mb-4 inline-block">
                         ID: <?php echo esc_html($display_id); ?>
                     </span>
 
                     <?php if ($thumb_url) : ?>
-                        <div class="mb-4 border-2 border-black aspect-video overflow-hidden grayscale group-hover:grayscale-0 transition-all">
+                        <div class="mb-4 border-2 border-neo-black aspect-video overflow-hidden grayscale group-hover:grayscale-0 transition-all">
                             <img src="<?php echo esc_url($thumb_url); ?>" alt="<?php the_title_attribute(); ?>" class="w-full h-full object-cover">
                         </div>
                     <?php endif; ?>
@@ -56,18 +56,18 @@ get_header(); ?>
                     </h2>
                 </div>
 
-                <div class="flex justify-between items-end border-t-4 border-black pt-4">
+                <div class="flex justify-between items-end border-t-4 border-neo-black pt-4">
                     <span class="font-bold uppercase text-sm">View Project</span>
                     <span class="text-2xl font-bold">&rarr;</span>
                 </div>
             </a>
         </article>
     <?php endwhile; else : ?>
-        <div class="col-span-full text-center py-24 border-4 border-dashed border-black opacity-50">
+        <div class="col-span-full text-center py-24 border-4 border-dashed border-neo-black opacity-50">
             <h3 class="text-4xl font-black uppercase">No Results Found</h3>
             <p class="font-mono mt-4">/SYSTEM/EMPTY_SET/ARCHIVE</p>
             <div class="mt-8">
-                <a href="<?php echo esc_url(home_url('/')); ?>" class="inline-block border-2 border-black px-4 py-2 font-bold hover:bg-black hover:text-white transition-colors">
+                <a href="<?php echo esc_url(home_url('/')); ?>" class="inline-block border-2 border-neo-black px-4 py-2 font-bold hover:bg-neo-black hover:text-neo-white transition-colors">
                     RESET FILTERS
                 </a>
             </div>

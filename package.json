@@ -1,0 +1,13 @@
+{
+  "name": "neoportfolio",
+  "version": "1.0.0",
+  "description": "Build scripts for the Neo Portfolio WordPress theme.",
+  "scripts": {
+    "dev": "tailwindcss -i ./assets/css/theme.scss -o ./assets/css/theme.css --watch",
+    "build": "tailwindcss -i ./assets/css/theme.scss -o ./assets/css/theme.css --minify"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.10",
+    "tailwindcss": "^3.4.17"
+  }
+}
