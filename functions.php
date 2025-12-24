@@ -13,6 +13,27 @@ if (!defined('ABSPATH')) {
 }
 
 /**
+ * Clean up Header
+ *
+ * Cleans up the not needed header elements
+ */
+add_filter( 'big_image_size_threshold', '__return_false' );
+add_filter( 'the_generator', '__return_null' );
+add_filter( 'use_block_editor_for_post', '__return_false', 10);
+add_filter( 'use_block_editor_for_post_type', '__return_false', 10);
+add_filter( 'wp_speculation_rules_configuration', '__return_null' );
+
+remove_action( 'wp_print_styles', 'print_emoji_styles');
+remove_action( 'wp_head', 'print_emoji_detection_script', 7);
+remove_action( 'wp_footer', 'wp_enqueue_global_styles', 1 );
+remove_action( 'wp_head', 'rsd_link');
+remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
+remove_action( 'wp_head', 'feed_links', 2 );
+remove_action( 'wp_head', 'feed_links_extra', 3 );
+remove_action( 'wp_head', 'rest_output_link_wp_head');
+remove_action( 'wp_head', 'wp_shortlink_wp_head');
+
+/**
  * Theme Setup
  *
  * Adds support for standard WordPress features like title tags,
@@ -67,6 +88,10 @@ function neoportfolio_enqueue_assets()
         [],
         $theme_version
     );
+
+    wp_dequeue_style( 'wp-block-library' );
+    wp_dequeue_style( 'classic-theme-styles' );
+    wp_dequeue_style( 'wp-img-auto-sizes-contain' );
 }
 
 add_action('wp_enqueue_scripts', 'neoportfolio_enqueue_assets');
